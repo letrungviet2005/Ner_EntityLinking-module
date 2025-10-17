@@ -22,9 +22,9 @@ tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
 # ================================
 #  Chuẩn bị nhãn
 # ================================
-# label_list = ['O', 'B-DRUG', 'I-DRUG', 'B-DISEASE', 'I-DISEASE', 'B-SYMPTOM', 'I-SYMPTOM']
-# label2id = {l: i for i, l in enumerate(label_list)}
-# id2label = {i: l for l, i in label2id.items()}
+label_list = ['O', 'B-DRUG', 'I-DRUG', 'B-DISEASE', 'I-DISEASE', 'B-SYMPTOM', 'I-SYMPTOM']
+label2id = {l: i for i, l in enumerate(label_list)}
+id2label = {i: l for l, i in label2id.items()}
 
 # ================================
 # 3Tokenize và căn chỉnh label
