@@ -59,12 +59,12 @@ tokenized_datasets = dataset.map(tokenize_and_align_labels, batched=True)
 # ================================
 #  Model và huấn luyện
 # ================================
-model = AutoModelForTokenClassification.from_pretrained(
-    model_name,
-    num_labels=len(label_list),
-    id2label=id2label,
-    label2id=label2id
-)
+# model = AutoModelForTokenClassification.from_pretrained(
+#     model_name,
+#     num_labels=len(label_list),
+#     id2label=id2label,
+#     label2id=label2id
+# )
 
 args = TrainingArguments(
     "ner_vielectra_checkpoint",
