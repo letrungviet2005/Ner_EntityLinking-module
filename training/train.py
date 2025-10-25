@@ -3,17 +3,15 @@ from transformers import AutoTokenizer, AutoModelForTokenClassification, DataCol
 import numpy as np
 import evaluate
 
-# ================================
-# Thông tin model và dataset
-# ================================
+
 model_name = "NlpHUST/ner-vietnamese-electra-base"
 
 dataset = load_dataset(
-    "conll2003",
+    "text",
     data_files={
-        "train": "dataset/word/train.conll",
-        "validation": "dataset/word/valid.conll",
-        "test": "dataset/word/test.conll"
+        "train": "dataset/word/train_word.conll",
+        "validation": "dataset/word/dev_word.conll",
+        "test": "dataset/word/test_word.conll"
     }
 )
 
@@ -24,9 +22,6 @@ label_list = ['O', 'B-DRUG', 'I-DRUG', 'B-DISEASE', 'I-DISEASE', 'B-SYMPTOM', 'I
 label2id = {l: i for i, l in enumerate(label_list)}
 id2label = {i: l for l, i in label2id.items()}
 
-# ================================
-# 3Tokenize và căn chỉnh label
-# ================================
 def tokenize_and_align_labels(examples):
     tokenized_inputs = tokenizer(
         examples["tokens"],
@@ -54,9 +49,7 @@ def tokenize_and_align_labels(examples):
 
 tokenized_datasets = dataset.map(tokenize_and_align_labels, batched=True)
 
-# ================================
-#  Model và huấn luyện
-# ================================
+
 model = AutoModelForTokenClassification.from_pretrained(
     model_name,
     num_labels=len(label_list),
