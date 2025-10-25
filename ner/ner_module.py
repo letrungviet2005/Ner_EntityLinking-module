@@ -5,7 +5,7 @@ from transformers import AutoTokenizer, AutoModelForTokenClassification, pipelin
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_NAME = "NlpHUST/ner-vietnamese-electra-base"
 DB_PATH = os.path.join(BASE_DIR, "drug_db.json")
-
+ 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=False)
 model = AutoModelForTokenClassification.from_pretrained(MODEL_NAME)
 
