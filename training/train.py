@@ -1,27 +1,73 @@
-from datasets import load_dataset
-from transformers import AutoTokenizer, AutoModelForTokenClassification, DataCollatorForTokenClassification, TrainingArguments, Trainer
+from datasets import Dataset, DatasetDict
+from transformers import (
+    AutoTokenizer,
+    AutoModelForTokenClassification,
+    DataCollatorForTokenClassification,
+    TrainingArguments,
+    Trainer
+)
 import numpy as np
 import evaluate
 
+# ======================
+# 1️⃣ Hàm đọc file .conll
+# ======================
+def read_conll_file(filepath):
+    sentences = []
+    tokens = []
+    ner_tags = []
 
+    with open(filepath, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                if tokens:
+                    sentences.append({"tokens": tokens, "ner_tags": ner_tags})
+                    tokens, ner_tags = [], []
+            else:
+                parts = line.split()
+                if len(parts) == 2:
+                    token, tag = parts
+                    tokens.append(token)
+                    ner_tags.append(tag)
+        if tokens:
+            sentences.append({"tokens": tokens, "ner_tags": ner_tags})
+
+    return Dataset.from_dict({
+        "tokens": [s["tokens"] for s in sentences],
+        "ner_tags": [s["ner_tags"] for s in sentences]
+    })
+
+
+# ======================
+# 2️⃣ Tạo DatasetDict
+# ======================
+dataset = DatasetDict({
+    "train": read_conll_file("dataset/word/train_word.conll"),
+    "validation": read_conll_file("dataset/word/dev_word.conll"),
+    "test": read_conll_file("dataset/word/test_word.conll"),
+})
+
+# ======================
+# 3️⃣ Chuẩn bị model và tokenizer
+# ======================
 model_name = "NlpHUST/ner-vietnamese-electra-base"
+tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
 
-dataset = load_dataset(
-    "text",
-    data_files={
-        "train": "dataset/word/train_word.conll",
-        "validation": "dataset/word/dev_word.conll",
-        "test": "dataset/word/test_word.conll"
-    }
-)
-
-tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
-
-
-label_list = ['O', 'B-DRUG', 'I-DRUG', 'B-DISEASE', 'I-DISEASE', 'B-SYMPTOM', 'I-SYMPTOM']
+label_list = [
+    "O",
+    "B-NAME", "I-NAME",
+    "B-AGE", "I-AGE",
+    "B-DATE", "I-DATE",
+    "B-ORGANIZATION", "I-ORGANIZATION",
+]
 label2id = {l: i for i, l in enumerate(label_list)}
 id2label = {i: l for l, i in label2id.items()}
 
+
+# ======================
+# Hàm tokenize + align nhãn
+# ======================
 def tokenize_and_align_labels(examples):
     tokenized_inputs = tokenizer(
         examples["tokens"],
@@ -47,9 +93,16 @@ def tokenize_and_align_labels(examples):
     tokenized_inputs["labels"] = labels
     return tokenized_inputs
 
+
+# ======================
+# 5️⃣ Tokenize toàn bộ dataset
+# ======================
 tokenized_datasets = dataset.map(tokenize_and_align_labels, batched=True)
 
 
+# ======================
+# 6️⃣ Khởi tạo model + Trainer
+# ======================
 model = AutoModelForTokenClassification.from_pretrained(
     model_name,
     num_labels=len(label_list),
@@ -58,7 +111,7 @@ model = AutoModelForTokenClassification.from_pretrained(
 )
 
 args = TrainingArguments(
-    "ner_vielectra_checkpoint",
+    output_dir="ner_vielectra_checkpoint",
     evaluation_strategy="epoch",
     learning_rate=2e-5,
     per_device_train_batch_size=8,
@@ -82,6 +135,7 @@ def compute_metrics(p):
     ]
     return metric.compute(predictions=true_predictions, references=true_labels)
 
+
 trainer = Trainer(
     model=model,
     args=args,
@@ -92,4 +146,7 @@ trainer = Trainer(
     compute_metrics=compute_metrics,
 )
 
+# ======================
+# 7️⃣ Train model
+# ======================
 trainer.train()
