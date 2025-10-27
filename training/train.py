@@ -136,15 +136,15 @@ def compute_metrics(p):
     return metric.compute(predictions=true_predictions, references=true_labels)
 
 
-trainer = Trainer(
-    model=model,
-    args=args,
-    train_dataset=tokenized_datasets["train"],
-    eval_dataset=tokenized_datasets["validation"],
-    tokenizer=tokenizer,
-    data_collator=data_collator,
-    compute_metrics=compute_metrics,
-)
+# trainer = Trainer(
+#     model=model,
+#     args=args,
+#     train_dataset=tokenized_datasets["train"],
+#     eval_dataset=tokenized_datasets["validation"],
+#     tokenizer=tokenizer,
+#     data_collator=data_collator,
+#     compute_metrics=compute_metrics,
+# )
 
 # ======================
 # 7️⃣ Train model
