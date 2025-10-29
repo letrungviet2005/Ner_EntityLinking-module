@@ -63,5 +63,10 @@
     "name": "Curcumin",
     "id": "HB00102",
     "description": "Hoạt chất chính trong nghệ, có tác dụng chống viêm, chống oxy hóa"
+  },
+  {
+    "name": "Echinacea",
+    "id": "HB00103",
+    "description": "Cây hoa cúc tím, tăng cường hệ miễn dịch, hỗ trợ điều trị cảm lạnh"
   }
 ]
