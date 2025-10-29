@@ -10,7 +10,7 @@ import numpy as np
 import evaluate
 
 # ======================
-# 1️⃣ Hàm đọc file .conll
+# Hàm đọc file .conll
 # ======================
 def read_conll_file(filepath):
     sentences = []
@@ -40,7 +40,7 @@ def read_conll_file(filepath):
 
 
 # ======================
-# 2️⃣ Tạo DatasetDict
+# Tạo DatasetDict
 # ======================
 dataset = DatasetDict({
     "train": read_conll_file("dataset/word/train_word.conll"),
@@ -48,9 +48,7 @@ dataset = DatasetDict({
     "test": read_conll_file("dataset/word/test_word.conll"),
 })
 
-# ======================
-# 3️⃣ Chuẩn bị model và tokenizer
-# ======================
+
 model_name = "NlpHUST/ner-vietnamese-electra-base"
 tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
 
@@ -95,13 +93,13 @@ def tokenize_and_align_labels(examples):
 
 
 # ======================
-# 5️⃣ Tokenize toàn bộ dataset
+# Tokenize toàn bộ dataset
 # ======================
 tokenized_datasets = dataset.map(tokenize_and_align_labels, batched=True)
 
 
 # ======================
-# 6️⃣ Khởi tạo model + Trainer
+# Khởi tạo model + Trainer
 # ======================
 model = AutoModelForTokenClassification.from_pretrained(
     model_name,
@@ -147,6 +145,6 @@ trainer = Trainer(
 )
 
 # ======================
-# 7️⃣ Train model
+# Train model
 # ======================
 trainer.train()
