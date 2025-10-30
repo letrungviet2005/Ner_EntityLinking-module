@@ -58,6 +58,12 @@ label_list = [
     "B-AGE", "I-AGE",
     "B-DATE", "I-DATE",
     "B-ORGANIZATION", "I-ORGANIZATION",
+    "B-SYMPTOM_AND_DISEASE", "I-SYMPTOM_AND_DISEASE",
+    "B-LOCATION", "I-LOCATION",
+    "B-DRUG", "I-DRUG",
+    "B-TREATMENT", "I-TREATMENT",
+    "B-TEST", "I-TEST",
+    "B-PATIENT_ID"
 ]
 label2id = {l: i for i, l in enumerate(label_list)}
 id2label = {i: l for l, i in label2id.items()}
@@ -95,7 +101,11 @@ def tokenize_and_align_labels(examples):
 # ======================
 # Tokenize toàn bộ dataset
 # ======================
-tokenized_datasets = dataset.map(tokenize_and_align_labels, batched=True)
+tokenized_datasets = dataset.map(
+    tokenize_and_align_labels,
+    batched=True,
+    remove_columns=dataset["train"].column_names
+)
 
 
 # ======================
