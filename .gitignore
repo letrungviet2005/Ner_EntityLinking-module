@@ -2,7 +2,4 @@ venv/
 .env
 .vscode/
 __pycache__/
-*.pyc
-.DS_Store
-Thumbs.db
 checkpoints/
