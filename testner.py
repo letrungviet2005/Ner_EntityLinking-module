@@ -31,7 +31,7 @@ text = "Ông Nguyễn Văn Hùng 45 tuổi đến Bệnh viện Chợ Rẫy tron
 # text = "Bác sĩ Trần Quang Huy cho biết bệnh nhân bị viêm gan B mãn tính đang sử dụng tenofovir để kiểm soát virus."
 # text = "Ông Lưu Văn Phước nhập viện ngày 22/7 trong tình trạng đau bụng dữ dội, được chẩn đoán viêm tụy cấp do rượu."
 # text = "Bé trai Nguyễn Hữu Khang 10 tuổi bị sốt xuất huyết Dengue, đang được truyền dịch và theo dõi tại Bệnh viện Nhi Đồng 1."
-text = "Ngày 28/10, Bệnh viện Bạch Mai tiếp nhận một bệnh nhân ngộ độc rượu methanol, được lọc máu khẩn cấp để loại bỏ độc chất."
+# text = "Ngày 28/10, Bệnh viện Bạch Mai tiếp nhận một bệnh nhân ngộ độc rượu methanol, được lọc máu khẩn cấp để loại bỏ độc chất."
 
 
 results = ner_pipeline(text)
