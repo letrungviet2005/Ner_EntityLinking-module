@@ -8,8 +8,7 @@ app = Flask(__name__)
 def analyze():
     data = request.json
     text = data.get("text", "")
-
-    # NER
+    
     entities = extract_entities(text)
     for e in entities:
         linked = link_entity(e["text"], top_k=1)
