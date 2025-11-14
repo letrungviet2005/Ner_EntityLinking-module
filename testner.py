@@ -36,5 +36,5 @@ text = "Bệnh nhân Trần Thị Lan nhập viện ngày 12/4 với triệu ch�
 
 results = ner_pipeline(text)
 
-# for r in results:
-#     print(f"🟢 Từ: {r['word']}\t| Nhãn: {r['entity_group']}\t| Độ tin cậy: {r['score']:.4f}")
+for r in results:
+    print(f"🟢 Từ: {r['word']}\t| Nhãn: {r['entity_group']}\t| Độ tin cậy: {r['score']:.4f}")
