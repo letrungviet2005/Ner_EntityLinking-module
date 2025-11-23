@@ -1,6 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 
-MODEL_NAME = "D:/2025/AI-FOR-LIFE-2025/module_medical_ner_linking/checkpoint/checkpoint"
+MODEL_NAME = "D:/2025/AI-FOR-LIFE-2025/module_medical_ner_linking/checkpoints/ner_icd11_final"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=False)
 model = AutoModelForTokenClassification.from_pretrained(MODEL_NAME)
@@ -13,7 +13,7 @@ ner_pipeline = pipeline(
 )
 
 # text = "Bác sĩ Nguyễn Trung Nguyên Giám đốc Trung tâm Chống độc Bệnh viện Bạch Mai cho biết bệnh nhân được chuyển đến bệnh viện ngày 7/3 chẩn đoán ngộ độc thuốc điều trị sốt rét chloroquine"
-text = "Bệnh nhân Trần Thị Lan nhập viện ngày 12/4 với triệu chứng nôn mửa, đau bụng và được chỉ định truyền dịch, uống than hoạt tính."
+text = "Bệnh nhân Trần Thị Lan nhập viện ngày 12/4 Nhiễm khuẩn Escherichia coli gây xuất huyết đường ruột."
 # text = "Ông Nguyễn Văn Hùng 45 tuổi đến Bệnh viện Chợ Rẫy trong tình trạng sốt cao 39 độ, đau đầu và ho khan kéo dài 5 ngày."
 # text = "Bệnh nhân nam Nguyễn Minh Tuấn được bác sĩ kê đơn thuốc paracetamol và amoxicillin để điều trị cảm cúm và viêm họng cấp"
 # text = "Ngày 15/5, tại Bệnh viện 108, bệnh nhân nữ Lê Thị Thu được chẩn đoán mắc viêm phổi do vi khuẩn và đang được dùng ceftriaxone"
