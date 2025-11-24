@@ -20,7 +20,6 @@ with open(ICD_DB_PATH, "r", encoding="utf-8") as f:
 ICD_DB = [item for item in ICD_DB if item.get("ICD11_Title_EN_VN") and item["ICD11_Title_EN_VN"] != "NaN"]
 
 
-# Lấy Tên tiếng Việt để nhúng (Embedding)
 DB_NAMES_VN = [item["ICD11_Title_EN_VN"] for item in ICD_DB]
 DB_EMBEDDINGS = sbert.encode(DB_NAMES_VN, convert_to_tensor=True, show_progress_bar=False)
 

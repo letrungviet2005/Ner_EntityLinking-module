@@ -16,7 +16,6 @@ try:
         tokenizer=tokenizer_vi,
         aggregation_strategy="simple"
     )
-    print("Tải mô hình tiếng Việt hoàn tất.")
 except Exception as e:
     print(f"Lỗi khi tải mô hình tiếng Việt: {e}")
     ner_vi_pipeline = None
