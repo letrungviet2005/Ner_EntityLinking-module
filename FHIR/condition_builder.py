@@ -1,9 +1,4 @@
 def build_fhir_condition_bundle(patient_data, ner_results):
-    """
-    Xây dựng FHIR Bundle cho:
-      - Bệnh nền (past_medical_history)
-      - Chẩn đoán hiện tại (diagnosis_text_input)
-    """
 
     bundle = {
         "status": "SUCCESS",

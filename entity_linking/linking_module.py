@@ -4,9 +4,8 @@ import os
 import torch
 import numpy as np 
 
-# --- Cài đặt cơ bản ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ICD_DB_PATH = os.path.join(BASE_DIR, "icd11v2.json") 
+ICD_DB_PATH = os.path.join(BASE_DIR, "data/icd11v2.json") 
 
 sbert = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 

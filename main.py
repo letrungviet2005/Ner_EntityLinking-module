@@ -18,7 +18,6 @@ except ImportError as e:
     def build_fhir_condition_bundle(input_text, ner_results): return {"status": "FAIL", "message": "FHIR builder not available"}
 
 app = Flask(__name__)
-
 @app.route("/analyze", methods=["POST"])
 def analyze():
     data = request.json
@@ -26,14 +25,12 @@ def analyze():
     if not data:
         return jsonify({"error": "Vui lòng gửi JSON trong request body."}), 400
 
-    # Lấy 2 trường cần thiết
     diagnosis_text = data.get("diagnosis_text_input", "")
     past_medical_history = data.get("medical_history", {}).get("past_medical_history", "")
 
     if not diagnosis_text and not past_medical_history:
         return jsonify({"error": "Không có dữ liệu cho 'diagnosis_text_input' hoặc 'past_medical_history'."}), 400
 
-    # Kết hợp 2 trường thành 1 list để NER
     texts_to_process = []
     if past_medical_history:
         texts_to_process.append(past_medical_history)
