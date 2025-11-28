@@ -12,7 +12,6 @@ try:
     from entity_linking.linking_module import link_icd_entity
     from FHIR.condition_builder import build_fhir_condition_bundle
 except ImportError as e:
-    print(f"LỖI IMPORT: Không thể tải module. Chi tiết: {e}")
     def extract_entities(text): return []
     def link_icd_entity(entity_text, top_k): return [{"error": "Linking module failed to load."}]
     def build_fhir_condition_bundle(input_text, ner_results): return {"status": "FAIL", "message": "FHIR builder not available"}
@@ -45,7 +44,6 @@ def analyze():
         except Exception as e:
             return jsonify({"error": f"Lỗi NER với text '{text}': {str(e)}"}), 500
 
-        # Linking ICD
         for entity in entities:
             entity_text = entity.get("text")
             if entity_text:
@@ -59,10 +57,8 @@ def analyze():
 
         all_entities.extend(entities)
 
-    # Build FHIR bundle từ tất cả thực thể
     fhir_bundle = build_fhir_condition_bundle(data, all_entities)
     return jsonify(fhir_bundle)
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

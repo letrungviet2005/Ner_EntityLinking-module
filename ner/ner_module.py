@@ -46,5 +46,3 @@ def extract_entities(text: str):
             unique_entities.append(ent)
 
     return unique_entities
-
-

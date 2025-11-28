@@ -13,7 +13,7 @@ ner_pipeline = pipeline(
 )
 
 # text = "Bác sĩ Nguyễn Trung Nguyên Giám đốc Trung tâm Chống độc Bệnh viện Bạch Mai cho biết bệnh nhân được chuyển đến bệnh viện ngày 7/3 chẩn đoán ngộ độc thuốc điều trị sốt rét chloroquine"
-text = "Bệnh nhân Trần Thị Lan nhập viện ngày 12/4 Nhiễm khuẩn Escherichia coli gây xuất huyết đường ruột."
+text = "Bệnh nhân Trần Thị Lan nhập viện ngày 12/4 từng bị Tăng huyết áp."
 # text = "Ông Nguyễn Văn Hùng 45 tuổi đến Bệnh viện Chợ Rẫy trong tình trạng sốt cao 39 độ, đau đầu và ho khan kéo dài 5 ngày."
 # text = "Bệnh nhân nam Nguyễn Minh Tuấn được bác sĩ kê đơn thuốc paracetamol và amoxicillin để điều trị cảm cúm và viêm họng cấp"
 # text = "Ngày 15/5, tại Bệnh viện 108, bệnh nhân nữ Lê Thị Thu được chẩn đoán mắc viêm phổi do vi khuẩn và đang được dùng ceftriaxone"
@@ -32,7 +32,6 @@ text = "Bệnh nhân Trần Thị Lan nhập viện ngày 12/4 Nhiễm khuẩn E
 # text = "Ông Lưu Văn Phước nhập viện ngày 22/7 trong tình trạng đau bụng dữ dội, được chẩn đoán viêm tụy cấp do rượu."
 # text = "Bé trai Nguyễn Hữu Khang 10 tuổi bị sốt xuất huyết Dengue, đang được truyền dịch và theo dõi tại Bệnh viện Nhi Đồng 1."
 # text = "Ngày 28/10, Bệnh viện Bạch Mai tiếp nhận một bệnh nhân ngộ độc rượu methanol, được lọc máu khẩn cấp để loại bỏ độc chất."
-
 
 results = ner_pipeline(text)
 
