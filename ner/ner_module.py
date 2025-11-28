@@ -4,8 +4,7 @@ from transformers import AutoTokenizer, AutoModelForTokenClassification, pipelin
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-MODEL_NAME_VI = "D:/2025/AI-FOR-LIFE-2025/module_medical_ner_linking/checkpoints/ner_icd11_final" 
-
+MODEL_NAME_VI = "D:/2025/AI-FOR-LIFE-2025/module_medical_ner_linking/checkpoints/ner_icd11_final_v5/ner_icd11_final_v5"
 
 try:
     print(f"Đang tải mô hình: {MODEL_NAME_VI}")
@@ -20,7 +19,6 @@ try:
 except Exception as e:
     print(f"Lỗi khi tải mô hình tiếng Việt: {e}")
     ner_vi_pipeline = None
-
 
 def extract_entities(text: str):
 
