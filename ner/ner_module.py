@@ -6,6 +6,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 MODEL_NAME_VI = "D:/2025/AI-FOR-LIFE-2025/module_medical_ner_linking/checkpoints/ner_icd11_final" 
 
+
 try:
     print(f"Đang tải mô hình: {MODEL_NAME_VI}")
     tokenizer_vi = AutoTokenizer.from_pretrained(MODEL_NAME_VI, use_fast=False)
